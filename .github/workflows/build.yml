@@ -3,6 +3,7 @@ on:
   push:
     branches: [ main ]
   workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,17 +19,14 @@ jobs:
         with:
           flutter-version: '3.19.0'
           channel: 'stable'
-      - name: Initialize Flutter Project
+      - name: Create and Build Project
         run: |
-          flutter create .
+          flutter create my_app
+          cd my_app
           flutter pub get
-      - name: Build APK
-        run: flutter build apk --release
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
+          flutter build apk --release
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
         with:
-          tag_name: v1.0.0
-          name: Sadeem v1.0.0
-          files: build/app/outputs/flutter-apk/app-release.apk
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          name: release-apk
+          path: my_app/build/app/outputs/flutter-apk/app-release.apk
