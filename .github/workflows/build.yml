@@ -16,27 +16,19 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.19.0'
           channel: 'stable'
 
-      - name: Accept Android Licenses (Smart Search)
+      - name: Build Project
         run: |
-          SDK_MANAGER=$(find $ANDROID_HOME -name sdkmanager | head -n 1)
-          echo "Found sdkmanager at: $SDK_MANAGER"
-          yes | $SDK_MANAGER --licenses
-
-      - name: Create and Build Project
-        run: |
+          flutter config --android-sdk /home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/android-sdk || true
           flutter create my_app
           cd my_app
           flutter pub get
-          flutter build apk --release
+          flutter build apk --release --no-pub
 
       - name: Upload APK
         uses: actions/upload-artifact@v3
