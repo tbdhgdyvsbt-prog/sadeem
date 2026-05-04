@@ -19,6 +19,8 @@ jobs:
         with:
           flutter-version: '3.19.0'
           channel: 'stable'
+      - name: Accept Android Licenses
+        run: yes | flutter doctor --android-licenses
       - name: Create and Build Project
         run: |
           flutter create my_app
