@@ -60,6 +60,22 @@ class _RadarScreenState extends State<RadarScreen> with SingleTickerProviderStat
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
+                    // Status Log Overlay
+                    Positioned(
+                      top: 20,
+                      left: 20,
+                      right: 20,
+                      child: StreamBuilder<String>(
+                        stream: _discoveryService.statusStream,
+                        builder: (context, snapshot) {
+                          return Text(
+                            snapshot.data ?? "Ready to scan...",
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(color: SadeemColors.neonCyan, fontSize: 12, fontStyle: FontStyle.italic),
+                          );
+                        },
+                      ),
+                    ),
                     // Pulsing Radar Ring
                     AnimatedBuilder(
                       animation: _pulseController,
