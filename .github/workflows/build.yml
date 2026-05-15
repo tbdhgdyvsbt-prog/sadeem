@@ -19,20 +19,18 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.0' # تحديث إلى نسخة أكثر استقراراً
+          flutter-version: '3.22.0'
           channel: 'stable'
 
       - name: Build Project
         run: |
           flutter config --no-analytics
-          flutter create my_app
-          cd my_app
+          flutter create .
           flutter pub get
-          # استخدام أمر بناء يتجاوز بعض قيود التحقق الصارمة
-          flutter build apk --release --no-pub --quiet
+          flutter build apk --release --quiet
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: release-apk
-          path: my_app/build/app/outputs/flutter-apk/app-release.apk
+          path: build/app/outputs/flutter-apk/app-release.apk
