@@ -1,7 +1,7 @@
 import 'dart:async';
-import '../data/repositories/chat_repository.dart';
-import '../domain/entities/peer.dart';
-import '../domain/entities/message.dart';
+import '../../data/repositories/chat_repository.dart';
+import '../../domain/entities/peer.dart';
+import '../../domain/entities/message.dart';
 
 class ChatManager {
   final ChatRepository _repository = ChatRepository();

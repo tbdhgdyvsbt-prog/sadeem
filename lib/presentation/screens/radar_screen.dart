@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../core/theme/colors.dart';
 import '../../domain/entities/peer.dart';
 import '../../data/datasources/p2p_discovery_service.dart';
-import 'space_background.dart';
+import '../widgets/space_background.dart';
 
 class RadarScreen extends StatefulWidget {
   final Function(Peer) onPeerSelected;
