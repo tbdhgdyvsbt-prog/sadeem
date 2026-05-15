@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../../core/theme/colors.dart';
 import '../../domain/entities/peer.dart';
 import '../../data/datasources/p2p_discovery_service.dart';
@@ -19,11 +20,19 @@ class _RadarScreenState extends State<RadarScreen> with SingleTickerProviderStat
   @override
   void initState() {
     super.initState();
+    _requestPermissions();
     _pulseController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
     )..repeat();
     _discoveryService.startListening();
+  }
+
+  Future<void> _requestPermissions() async {
+    await [
+      Permission.location,
+      Permission.nearbyWifiDevices, // For Android 13+
+    ].request();
   }
 
   @override
