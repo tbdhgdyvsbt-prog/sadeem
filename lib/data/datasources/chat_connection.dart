@@ -47,7 +47,7 @@ class ChatConnection {
   }
 
   void _sendHandshake() {
-    _sendMessage("SADEEM_HANDSHAKE:Hello from ${peer.id}");
+    sendMessage("SADEEM_HANDSHAKE:Hello from ${peer.id}");
   }
 
   void _listenForMessages() {
